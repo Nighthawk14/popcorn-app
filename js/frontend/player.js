@@ -227,11 +227,7 @@ window.spawnVideoPlayer = function (url, subs, movieModel) {
       alert('Error: ' + videoError(document.getElementById('video_player').player.error()));
     });
 
-    var currentMouseTimeDiv = $("<div />").css({
-      'font-size': '14px',
-      'position': 'absolute',
-      'top': '-25px'
-    }).addClass('vjs-currentMouseTime');
+    var currentMouseTimeDiv = $("<div />").addClass('vjs-currentMouseTime');
     $('.vjs-progress-control').on('mousemove',function(event) {
       var len = video.duration(),
         el = $('.vjs-progress-control'),
