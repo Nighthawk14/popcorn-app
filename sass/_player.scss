@@ -7,8 +7,8 @@
   top: 0;
   width: 100%;
   z-index: 998;
-  // This fixes an issue: The header has app-region:drag, 
-  // which causes some weird issues with clicks of elements which are right on top of the header... like the video-container.  
+  // This fixes an issue: The header has app-region:drag,
+  // which causes some weird issues with clicks of elements which are right on top of the header... like the video-container.
   // There's a JS workaround so you can drag the window by the video, since app-region:drag fucks up the mouse events.
   -webkit-app-region: no-drag;
 }
@@ -94,8 +94,8 @@
     color: $popcorn-blue;
   }
 
-  .vjs-text-track-display { 
-    font-size: 1em; 
+  .vjs-text-track-display {
+    font-size: 1em;
     pointer-events: none;
   }
   .vjs-loading-spinner { font-size: 1em; }
@@ -103,6 +103,14 @@
   .vjs-control-bar { font-size: 10px; }
   .vjs-menu-item { color: #000; }
   .vjs-seek-handle { display: none; }
+
+  .vjs-progress-control{
+    .vjs-currentMouseTime{
+      font-size: 14px;
+      position: absolute;
+      top: -25px;
+    }
+  }
 }
 
 

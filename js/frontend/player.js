@@ -211,7 +211,6 @@ window.spawnVideoPlayer = function (url, subs, movieModel) {
       $(document).trigger('videoExit');
     });
 
-
     // Had only tracking in, leave it here if we want to do something else when paused.
     video.player().on('pause', function () {
 
@@ -226,6 +225,27 @@ window.spawnVideoPlayer = function (url, subs, movieModel) {
     video.player().on('error', function (error) {
       // TODO: what about some more elegant error tracking
       alert('Error: ' + videoError(document.getElementById('video_player').player.error()));
+    });
+
+    var currentMouseTimeDiv = $("<div />").addClass('vjs-currentMouseTime');
+    $('.vjs-progress-control').on('mousemove',function(event) {
+      var len = video.duration(),
+        el = $('.vjs-progress-control'),
+        per = Math.round((event.pageX*100) / el.width()),
+        dur = Math.round((Math.round((per*len)/100))/60);
+      if(dur && typeof dur === 'number')
+      {
+        $(this).prepend(currentMouseTimeDiv);
+        var san = (dur % 60 < 10) ? "0" : "";
+        dur = (dur < 60) ? '0:'+san+dur : Math.floor(dur/60)+':'+san+(dur-(60*Math.floor(dur/60)));
+        currentMouseTimeDiv.html(dur);
+        var wid = currentMouseTimeDiv.width(),
+          left = (event.pageX - wid/2);
+        left = (left < 0 || (left+wid > el.width())) ? (left < 0) ? 0 : el.width()-wid : left;
+        currentMouseTimeDiv.css('left',left);
+      }
+    }).on('mouseout',function(event) {
+      $(this).find('.vjs-currentMouseTime').remove();
     });
 
     App.loader(false);
